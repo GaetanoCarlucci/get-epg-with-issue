@@ -38,7 +38,7 @@ Example:
 then run the script:
 
 ```
-$python3 get_contract_relationship.py
+$python3 get_epg_with_issue.py
 ```
 
 it will provide potential impacted EPG.
