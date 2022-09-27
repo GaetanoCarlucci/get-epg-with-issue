@@ -1,5 +1,28 @@
 # Get Epg with issue
 
+## Getting Started
+
+### Prerequisites
+
+* Python 3 (create your venv)
+
+```
+ python3 -m venv venv
+```
+* Activate your venv
+
+```
+ source venv/bin/activate
+```
+
+### Installing
+1. Run pip command to install required libraries.
+
+```
+> pip install -r requirements.txt
+```
+
+## Usage
 Insert the login data in the file `Utils/credentials.json`:
 
 Example:
