@@ -31,11 +31,12 @@ def main():
 
     my_fabric = Session(data['apic_ip_address'], data["apic_port"],
                         data['apic_admin_user'], data['apic_admin_password'])
+
     cookie = my_fabric.get_cookie()
     my_fabric.set_cookie(cookie)
 
     epg_list = get_all_epg(my_fabric, 'fvAEPg')
-        
+
     leaf_ip = ['10.47.142.53', '10.47.142.54']
     #epg_list = [['LDO', 'LSX_02_AP', 'SAP_PHY_EPG'], ['SYS', 'DC02 - AP', 'VEEAM - EPG'],
     #            ['SXC', 'POMEZIA_02_AP', 'SCGIT_EPG'], ['SDI', 'SDI - AP', 'Test_Wass - EPG'],
@@ -55,9 +56,15 @@ def main():
         my_fabric.set_cookie(cookie)
 
         url_base = 'https://' + address + '/api/node/class/ipCons.xml?query-target-filter=and(and(wcard(ipCons.dn,"dom-'
+        i = 0
 
         with open('OUTPUT_' + address + '_.txt', 'w') as f:
             for row in epg_list:
+                i = i + 1
+                if i == 20:
+                    cookie = my_fabric.get_cookie()
+                    my_fabric.set_cookie(cookie)
+                    i = 0
                 url = url_base + row[0] + '.*epgDn-\[uni/tn-' + row[0] + '/ap-' \
                       + row[1] + '/epg-' + row[2] + '")),not(wcard(ipCons.dn,"epp")))'
                 print(url)
