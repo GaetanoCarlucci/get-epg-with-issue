@@ -22,7 +22,7 @@ def get_all_epg(my_fabric, api_name):
                         tenant_name = (re.search('/tn-(.*?)/ap-(.*?)/epg-(.*)', attribute)).group(1)
                         app_name = (re.search('/tn-(.*?)/ap-(.*?)/epg-(.*)', attribute)).group(2)
                         epg_name = (re.search('/tn-(.*?)/ap-(.*?)/epg-(.*)', attribute)).group(3)
-                    output.append([tenant_name, app_name, epg_name])
+                        output.append([tenant_name, app_name, epg_name])
     return output
 
 def main():
