@@ -10,7 +10,7 @@ import json
 from Utils.Session import Session
 import re
 
-# Returns a dict with VRF scope as key and VRF name as value
+# Returns a dict with all EPG deployed in the fabric
 def get_all_epg(my_fabric, api_name):
     output = []
     data_json = json.loads(my_fabric.apic_json_get(api_name))
