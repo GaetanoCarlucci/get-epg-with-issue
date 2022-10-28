@@ -27,6 +27,13 @@ class Session(object):
             return {'APIC-cookie': token}
         except requests.exceptions.Timeout:
             print("APIC %s timed out " % (self.ip))
+            auth_url = "https://%s:%s/api/aaaLogin.json" % (self.ip, self.port)
+            auth_json = '{"aaaUser": {"attributes": {"name": "%s", "pwd": "%s"}}}' % (self.user, self.passwd)
+            print("Getting cookie from %s" % self.ip)
+            session = requests.post(auth_url, data=auth_json, verify=False, timeout=5)
+            session_json = session.json()
+            token = session_json["imdata"][0]["aaaLogin"]["attributes"]["token"]
+            return {'APIC-cookie': token}
         except requests.exceptions.ConnectionError:
             print("Connection error can't logging to APIC %s with user %s" % (self.ip, self.user))
 
